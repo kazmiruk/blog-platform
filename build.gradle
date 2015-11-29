@@ -1,0 +1,95 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+description = ""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+group = 'com.github.kazmiruk.blog'
+version = 'v' + new SimpleDateFormat('yyyy.MM.dd').format(new Date()) + "-SNAPSHOT"
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': project.name, 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def apacheTilesVersion = '3.0.5'
+    def logbackVersion = '1.1.3'
+    def springVersion = '4.2.3.RELEASE'
+
+    /* Start of project dependencies */
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.13'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
+    compile group: 'ch.qos.logback', name: 'logback-core', version: logbackVersion
+
+    // spring dependencies
+    compile group: 'org.springframework', name: 'spring-core', version: springVersion
+    compile group: 'org.springframework', name: 'spring-expression', version: springVersion
+    compile group: 'org.springframework', name: 'spring-beans', version: springVersion
+    compile group: 'org.springframework', name: 'spring-aop', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context-support', version: springVersion
+    compile group: 'org.springframework', name: 'spring-tx', version: springVersion
+    compile group: 'org.springframework', name: 'spring-jdbc', version: springVersion
+    compile group: 'org.springframework', name: 'spring-orm', version: springVersion
+    compile group: 'org.springframework', name: 'spring-oxm', version: springVersion
+    compile group: 'org.springframework', name: 'spring-web', version: springVersion
+    compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
+    compile group: 'org.springframework', name: 'spring-webmvc-portlet', version: springVersion
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.9.1.RELEASE'
+
+    compile group: 'org.apache.tiles', name: 'tiles-core', version: apacheTilesVersion
+    compile group: 'org.apache.tiles', name: 'tiles-jsp', version: apacheTilesVersion
+
+    provided group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    provided group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2'
+
+    compile group: 'javax.transaction', name: 'jta', version: '1.1'
+
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.0.4.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.0.4.Final'
+
+    // TODO: it should be only in development version, in production we should use something like postgresql
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.3'
+    /* End of project dependencies */
+
+    /* Start of test dependencies */
+    testCompile group: 'org.testng', name: 'testng', version: '6.9.4'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.19'
+
+    // spring dependencies
+    testCompile group: 'org.springframework', name: 'spring-test', version: springVersion
+    /* End of test dependencies */
+}
+
+test {
+    return useTestNG()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+jettyRunWar{
+    contextPath = ""
+    httpPort = 8080
+}

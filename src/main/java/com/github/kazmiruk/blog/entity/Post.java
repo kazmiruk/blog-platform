@@ -1,6 +1,7 @@
 package com.github.kazmiruk.blog.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -13,6 +14,8 @@ public class Post {
     private String title;
 
     private String content;
+
+    private Date publishedDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -59,5 +62,13 @@ public class Post {
 
     public void setCommentaries(List<Commentary> commentaries) {
         this.commentaries = commentaries;
+    }
+
+    public Date getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(Date publishDate) {
+        this.publishedDate = publishDate;
     }
 }

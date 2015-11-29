@@ -2,6 +2,7 @@ package com.github.kazmiruk.blog.entity;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Commentary {
@@ -10,6 +11,8 @@ public class Commentary {
     private Integer id;
 
     private String content;
+
+    private Date publishedDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -49,5 +52,13 @@ public class Commentary {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Date getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(Date publishDate) {
+        this.publishedDate = publishDate;
     }
 }

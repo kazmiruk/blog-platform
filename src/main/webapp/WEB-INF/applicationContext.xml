@@ -4,6 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
@@ -11,7 +12,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/jdbc
-        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <context:component-scan base-package="com.github.kazmiruk.blog">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -19,7 +20,7 @@
 
     <jdbc:embedded-database type="HSQL" id="dataSource"/>
 
-    <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="Emf">
+    <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="emf">
         <property name="packagesToScan" value="com.github.kazmiruk.blog.entity"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaProperties">
@@ -38,4 +39,8 @@
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
+    <jpa:repositories base-package="com.github.kazmiruk.blog.repository"
+                      entity-manager-factory-ref="emf"
+                      transaction-manager-ref="transactionManager"/>
 </beans>

@@ -68,6 +68,8 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.0.4.Final'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.0.4.Final'
 
+    compile group: 'jstl', name: 'jstl', version: '1.2'
+
     // TODO: it should be only in development version, in production we should use something like postgresql
     compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.3'
     /* End of project dependencies */

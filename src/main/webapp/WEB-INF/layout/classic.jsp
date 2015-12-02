@@ -2,11 +2,13 @@
 
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
+<%@ include file="taglib.jsp" %>
 
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+    <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
@@ -37,9 +39,27 @@
                         <li class="${current == 'index' ? 'active': ''}">
                             <a href="<spring:url value="/"/>">Home</a>
                         </li>
-                        <li class="${current == 'users' ? 'active': ''}">
-                            <a href="<spring:url value="/users"/>">Users</a>
-                        </li>
+                        <security:authorize access="!isAuthenticated()">
+                            <li class="${current == 'register' ? 'active': ''}">
+                                <a href="<spring:url value="/register"/>">Sign up</a>
+                            </li>
+                            <li class="${current == 'login' ? 'active': ''}">
+                                <a href="<spring:url value="/login"/>">Login</a>
+                            </li>
+                        </security:authorize>
+
+                        <security:authorize access="hasRole('ROLE_ADMIN')">
+                            <li class="${current == 'users' ? 'active': ''}">
+                                <a href="<spring:url value="/users"/>">Users</a>
+                            </li>
+                        </security:authorize>
+
+                        <security:authorize access="isAuthenticated()">
+                            <li>
+                                <form:form method="post" action="/logout" name="logoutForm"/>
+                                <a onclick="document.logoutForm.submit(); return false;" href="#">Logout</a>
+                            </li>
+                        </security:authorize>
                     </ul>
                 </div>
             </div>

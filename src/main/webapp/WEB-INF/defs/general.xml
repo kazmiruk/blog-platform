@@ -36,4 +36,10 @@
         <put-attribute name="body" value="/WEB-INF/jsp/login.jsp"/>
         <put-attribute name="current" value="login"/>
     </definition>
+
+    <definition name="create-post" extends="common">
+        <put-attribute name="title" value="Blog-platform - Create post"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/create-post.jsp"/>
+        <put-attribute name="current" value="post"/>
+    </definition>
 </tiles-definitions>

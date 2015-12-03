@@ -42,19 +42,29 @@ public class UserService {
         return userRepository.findOne(id);
     }
 
-    @Transactional
-    public User findOneWithPosts(int id) {
-        User user = findOne(id);
+    protected User populateUserWithPosts(User user) {
         List<Post> posts = postRepository.findByUser(user);
 
         for(Post post: posts) {
             List<Commentary> commentaries = commentaryRepository.findByPost(
-                post, new PageRequest(0, 10, Sort.Direction.DESC, "publishedDate"));
+                    post, new PageRequest(0, 10, Sort.Direction.DESC, "publishedDate"));
             post.setCommentaries(commentaries);
         }
         user.setPosts(posts);
 
         return user;
+    }
+
+    @Transactional
+    public User findOneWithPosts(int id) {
+        User user = findOne(id);
+        return populateUserWithPosts(user);
+    }
+
+    @Transactional
+    public User findOneWithPosts(String name) {
+        User user = userRepository.findByName(name);
+        return populateUserWithPosts(user);
     }
 
     public void save(User user) {
@@ -66,5 +76,9 @@ public class UserService {
         user.setRoles(roles);
 
         userRepository.save(user);
+    }
+
+    public void delete(int id) {
+        userRepository.delete(id);
     }
 }

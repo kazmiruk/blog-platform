@@ -55,6 +55,12 @@
                         </security:authorize>
 
                         <security:authorize access="isAuthenticated()">
+                            <li class="${current == 'post' ? 'active': ''}">
+                                <a href="<spring:url value="/post/create"/>">Create post</a>
+                            </li>
+                            <li class="${current == 'users' ? 'active': ''}">
+                                <a href="<spring:url value="/account"/>">My account</a>
+                            </li>
                             <li>
                                 <form:form method="post" action="/logout" name="logoutForm"/>
                                 <a onclick="document.logoutForm.submit(); return false;" href="#">Logout</a>

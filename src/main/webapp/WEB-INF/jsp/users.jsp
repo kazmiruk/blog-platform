@@ -6,13 +6,19 @@
     <thead>
         <tr>
             <th>user name</th>
+            <th>operations</th>
         </tr>
     </thead>
     <tbody>
         <c:forEach items="${users}" var="user">
             <tr>
                 <td>
-                    <a href="<spring:url value="/users/${user.id}"/>">${user.name}</a>
+                    <a href="<spring:url value="/users/${user.id}"/>">
+                        <c:out value="${user.name}"/>
+                    </a>
+                </td>
+                <td>
+                    <a href="<spring:url value="/users/remove/${user.id}"/>" class="btn btn-danger">Remove</a>
                 </td>
             </tr>
         </c:forEach>

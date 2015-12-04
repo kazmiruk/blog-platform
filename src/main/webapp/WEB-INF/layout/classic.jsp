@@ -58,7 +58,7 @@
                             <li class="${current == 'post' ? 'active': ''}">
                                 <a href="<spring:url value="/post/create"/>">Create post</a>
                             </li>
-                            <li class="${current == 'users' ? 'active': ''}">
+                            <li class="${current == 'account' ? 'active': ''}">
                                 <a href="<spring:url value="/account"/>">My account</a>
                             </li>
                             <li>

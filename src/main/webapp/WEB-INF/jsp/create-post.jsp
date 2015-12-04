@@ -7,12 +7,14 @@
         <label for="title" class="col-sm-2 control-label">Title:</label>
         <div class="col-sm-10">
             <form:input path="title" cssClass="form-control"/>
+            <form:errors path="title"/>
         </div>
     </div>
     <div class="form-group">
         <label for="content" class="col-sm-2 control-label">Content:</label>
         <div class="col-sm-10">
-            <form:textarea path="content" cssClass="form-control"/>
+            <form:textarea path="content"  cssClass="form-control"/>
+            <form:errors path="content"/>
         </div>
     </div>
     <div class="form-group">

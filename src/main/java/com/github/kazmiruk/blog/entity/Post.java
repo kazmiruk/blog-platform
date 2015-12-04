@@ -1,6 +1,7 @@
 package com.github.kazmiruk.blog.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,10 @@ public class Post {
     @GeneratedValue
     private Integer id;
 
+    @Size(min = 1, message = "Title should be filled")
     private String title;
 
+    @Size(min = 1, message = "Content should be filled")
     private String content;
 
     private Date publishedDate;

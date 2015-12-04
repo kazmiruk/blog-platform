@@ -6,11 +6,13 @@ import com.github.kazmiruk.blog.service.PostService;
 import com.github.kazmiruk.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -26,13 +28,17 @@ public class PostController {
         return new Post();
     }
 
-    @RequestMapping("/post")
+    @RequestMapping("/post/create")
     public String createPost() {
         return "create-post";
     }
 
     @RequestMapping(value = "/post/create", method = RequestMethod.POST)
-    public String doCreatePost(@ModelAttribute("post") Post post, Principal principal) {
+    public String doCreatePost(@Valid @ModelAttribute("post") Post post, BindingResult result, Principal principal) {
+        if (result.hasErrors()) {
+            return "create-post";
+        }
+
         String userName = principal.getName();
         postService.save(userName, post);
         return "redirect:/";

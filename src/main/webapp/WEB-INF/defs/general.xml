@@ -67,5 +67,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/post/list.jsp"/>
         <put-attribute name="current" value="index"/>
     </definition>
+
+    <definition name="post-view" extends="common">
+        <put-attribute name="title" value="Blog-platform"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/post/view.jsp"/>
+        <put-attribute name="current" value="post-view"/>
+    </definition>
     <!-- END: Post -->
 </tiles-definitions>

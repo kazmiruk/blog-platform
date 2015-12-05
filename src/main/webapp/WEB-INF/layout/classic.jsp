@@ -7,9 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-    <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 

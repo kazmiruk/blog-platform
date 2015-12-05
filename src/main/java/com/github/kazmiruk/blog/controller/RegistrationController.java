@@ -24,14 +24,14 @@ public class RegistrationController {
     }
 
     @RequestMapping
-    public String showRegister() {
+    public String register() {
         return "registration";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String doRegister(@Valid @ModelAttribute("user") User user, BindingResult result) {
         if (result.hasErrors()) {
-            return showRegister();
+            return register();
         }
 
         userService.save(user);

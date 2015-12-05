@@ -1,9 +1,10 @@
 package com.github.kazmiruk.blog.service;
 
 
+import com.github.kazmiruk.blog.entity.Commentary;
 import com.github.kazmiruk.blog.entity.Post;
+import com.github.kazmiruk.blog.repository.CommentaryRepository;
 import com.github.kazmiruk.blog.repository.PostRepository;
-import com.github.kazmiruk.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,9 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private CommentaryRepository commentaryRepository;
+
     @Transactional
     public void save(Post post) {
         post.setPublishedDate(new Date());
@@ -33,6 +37,14 @@ public class PostService {
 
     public Post findOne(int id) {
         return postRepository.findOne(id);
+    }
+
+    public Post findOneWithCommentaries(int id) {
+        Post post = postRepository.findOne(id);
+        List<Commentary> commentaries = commentaryRepository.findByPost(post);
+        post.setCommentaries(commentaries);
+
+        return post;
     }
 
     public List<Post> findAll() {

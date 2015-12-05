@@ -2,6 +2,7 @@ package com.github.kazmiruk.blog.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -10,6 +11,7 @@ public class Commentary {
     @GeneratedValue
     private Integer id;
 
+    @Size(min = 1, message = "You should set commentary text!")
     private String content;
 
     private Date publishedDate;

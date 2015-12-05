@@ -4,5 +4,5 @@
 
 
 <c:forEach items="${posts}" var="post">
-    <h1>${post.title}</h1>
+    <a href="<spring:url value="/post/${post.id}" />">${post.title}</a>
 </c:forEach>

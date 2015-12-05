@@ -12,4 +12,6 @@ import java.util.List;
 
 public interface CommentaryRepository extends JpaRepository<Commentary, Integer> {
     List<Commentary> findByUser(User user, PageRequest publishedDate);
+
+    List<Commentary> findByPost(Post post);
 }

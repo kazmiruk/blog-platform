@@ -20,10 +20,6 @@ public class Post {
 
     private Date publishedDate;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Commentary> commentaries;
 
@@ -49,14 +45,6 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public List<Commentary> getCommentaries() {

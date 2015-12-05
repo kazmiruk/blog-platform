@@ -29,9 +29,6 @@ public class User {
     private List<Role> roles;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Post> posts;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Commentary> commentaries;
 
     public Integer getId() {
@@ -72,14 +69,6 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
     }
 
     public List<Commentary> getCommentaries() {

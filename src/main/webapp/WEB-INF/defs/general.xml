@@ -7,45 +7,65 @@
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
     </definition>
 
-    <definition name="index" extends="common">
-        <put-attribute name="title" value="Blog-platform"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
-        <put-attribute name="current" value="index"/>
+    <!-- BEGIN: Admin Index -->
+    <definition name="admin-index" extends="common">
+        <put-attribute name="title" value="Blog-platform - Admin"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/index.jsp"/>
+        <put-attribute name="current" value="admin"/>
     </definition>
+    <!-- END: Admin Index -->
 
-    <definition name="users" extends="common">
-        <put-attribute name="title" value="Blog-platform - Users"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/users.jsp"/>
-        <put-attribute name="current" value="users"/>
+    <!-- BEGIN: Admin Users -->
+    <definition name="admin-user-list" extends="common">
+        <put-attribute name="title" value="Blog-platform - Admin: Users list"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/user/list.jsp"/>
+        <put-attribute name="current" value="admin"/>
     </definition>
+    <!-- END: Admin Users -->
 
-    <definition name="user-detail" extends="common">
-        <put-attribute name="title" value="Blog-platform - User detail"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/user-detail.jsp"/>
-        <put-attribute name="current" value="users"/>
+    <!-- BEING: Admin Posts -->
+    <definition name="admin-post-create" extends="common">
+        <put-attribute name="title" value="Blog-platform - Admin: Create post"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/post/create.jsp"/>
+        <put-attribute name="current" value="admin"/>
     </definition>
+    <!-- END: Admin Posts -->
 
-    <definition name="account" extends="common">
-        <put-attribute name="title" value="Blog-platform - User account"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/user-detail.jsp"/>
-        <put-attribute name="current" value="account"/>
-    </definition>
-
-    <definition name="user-register" extends="common">
+    <!-- BEGIN: Registration -->
+    <definition name="registration" extends="common">
         <put-attribute name="title" value="Blog-platform - User registration"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/user-register.jsp"/>
-        <put-attribute name="current" value="register"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/registration.jsp"/>
+        <put-attribute name="current" value="registration"/>
     </definition>
+    <!-- END: Registration -->
 
+    <!-- BEGIN: Login -->
     <definition name="login" extends="common">
         <put-attribute name="title" value="Blog-platform - Login"/>
         <put-attribute name="body" value="/WEB-INF/jsp/login.jsp"/>
         <put-attribute name="current" value="login"/>
     </definition>
+    <!-- END: Login -->
 
-    <definition name="create-post" extends="common">
-        <put-attribute name="title" value="Blog-platform - Create post"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/create-post.jsp"/>
-        <put-attribute name="current" value="post"/>
+    <!-- BEGIN: User -->
+    <definition name="user-detail" extends="common">
+        <put-attribute name="title" value="Blog-platform - User detail"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/user/detail.jsp"/>
+        <put-attribute name="current" value="user-detail"/>
     </definition>
+
+    <definition name="user-account" extends="common">
+        <put-attribute name="title" value="Blog-platform - User detail"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/user/detail.jsp"/>
+        <put-attribute name="current" value="user-account"/>
+    </definition>
+    <!-- END: User -->
+
+    <!-- BEGIN: Post -->
+    <definition name="post-index" extends="common">
+        <put-attribute name="title" value="Blog-platform"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/post/list.jsp"/>
+        <put-attribute name="current" value="index"/>
+    </definition>
+    <!-- END: Post -->
 </tiles-definitions>

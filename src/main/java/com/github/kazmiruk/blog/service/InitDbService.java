@@ -60,7 +60,6 @@ public class InitDbService {
         testPost.setTitle("Test post");
         testPost.setContent("Content of test post");
         testPost.setPublishedDate(new Date());
-        testPost.setUser(userAdmin);
         postRepository.save(testPost);
 
         Commentary test_commentary1 = new Commentary();

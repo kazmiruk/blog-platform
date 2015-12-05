@@ -40,8 +40,8 @@
                             <a href="<spring:url value="/"/>">Home</a>
                         </li>
                         <security:authorize access="!isAuthenticated()">
-                            <li class="${current == 'register' ? 'active': ''}">
-                                <a href="<spring:url value="/register"/>">Sign up</a>
+                            <li class="${current == 'registration' ? 'active': ''}">
+                                <a href="<spring:url value="/registration"/>">Sign up</a>
                             </li>
                             <li class="${current == 'login' ? 'active': ''}">
                                 <a href="<spring:url value="/login"/>">Login</a>
@@ -49,17 +49,14 @@
                         </security:authorize>
 
                         <security:authorize access="hasRole('ROLE_ADMIN')">
-                            <li class="${current == 'users' ? 'active': ''}">
-                                <a href="<spring:url value="/users"/>">Users</a>
+                            <li class="${current == 'admin' ? 'active': ''}">
+                                <a href="<spring:url value="/admin"/>">Admin</a>
                             </li>
                         </security:authorize>
 
                         <security:authorize access="isAuthenticated()">
-                            <li class="${current == 'post' ? 'active': ''}">
-                                <a href="<spring:url value="/post/create"/>">Create post</a>
-                            </li>
-                            <li class="${current == 'account' ? 'active': ''}">
-                                <a href="<spring:url value="/account"/>">My account</a>
+                            <li class="${current == 'user-account' ? 'active': ''}">
+                                <a href="<spring:url value="/user"/>">My account</a>
                             </li>
                             <li>
                                 <form:form method="post" action="/logout" name="logoutForm"/>

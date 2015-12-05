@@ -2,7 +2,6 @@ package com.github.kazmiruk.blog.service;
 
 
 import com.github.kazmiruk.blog.entity.Commentary;
-import com.github.kazmiruk.blog.entity.Post;
 import com.github.kazmiruk.blog.entity.Role;
 import com.github.kazmiruk.blog.entity.User;
 import com.github.kazmiruk.blog.repository.CommentaryRepository;
@@ -26,9 +25,6 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PostRepository postRepository;
-
-    @Autowired
     private CommentaryRepository commentaryRepository;
 
     @Autowired
@@ -43,14 +39,9 @@ public class UserService {
     }
 
     protected User populateUserWithPosts(User user) {
-        List<Post> posts = postRepository.findByUser(user);
-
-        for(Post post: posts) {
-            List<Commentary> commentaries = commentaryRepository.findByPost(
-                    post, new PageRequest(0, 10, Sort.Direction.DESC, "publishedDate"));
-            post.setCommentaries(commentaries);
-        }
-        user.setPosts(posts);
+        List<Commentary> commentaries = commentaryRepository.findByUser(
+            user, new PageRequest(0, 10, Sort.Direction.DESC, "publishedDate"));
+        user.setCommentaries(commentaries);
 
         return user;
     }

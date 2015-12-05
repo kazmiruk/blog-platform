@@ -11,7 +11,7 @@
 </c:forEach>
 
 <security:authorize access="isAuthenticated()">
-    <form:form action="/post/${post.id}/commentary/" commandName="commentary" cssClass="form-horizontal">
+    <form:form action="/post/${post.id}/commentary/" commandName="commentary" cssClass="form-horizontal commentaryForm">
         <div class="form-group">
             <label for="content" class="col-sm-2 control-label">Content:</label>
             <div class="col-sm-10">
@@ -25,4 +25,22 @@
             </div>
         </div>
     </form:form>
+
+    <script>
+        jQuery(document).ready(function() {
+            jQuery(".commentaryForm").validate({
+                rules: {
+                    content: {
+                        required: true
+                    }
+                },
+                highlight: function(element) {
+                    jQuery(element).closest(".form-group").removeClass("has-success").addClass("has-error");
+                },
+                unhighlight: function(element) {
+                    jQuery(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+                }
+            });
+        });
+    </script>
 </security:authorize>

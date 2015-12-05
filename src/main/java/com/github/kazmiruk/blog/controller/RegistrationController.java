@@ -6,9 +6,7 @@ import com.github.kazmiruk.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -36,5 +34,12 @@ public class RegistrationController {
 
         userService.save(user);
         return "redirect:/registration?success=true";
+    }
+
+    @RequestMapping("/available")
+    @ResponseBody
+    public String availableEmail(@RequestParam String email) {
+        Boolean available = userService.findOne(email) == null;
+        return available.toString();
     }
 }

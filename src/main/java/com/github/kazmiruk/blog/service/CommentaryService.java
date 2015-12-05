@@ -21,8 +21,8 @@ public class CommentaryService {
     private UserRepository userRepository;
 
     @Transactional
-    public void save(String userName, Commentary commentary) {
-        commentary.setUser(userRepository.findByName(userName));
+    public void save(String email, Commentary commentary) {
+        commentary.setUser(userRepository.findByEmail(email));
         commentary.setPublishedDate(new Date());
         commentaryRepository.save(commentary);
     }

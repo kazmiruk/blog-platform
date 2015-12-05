@@ -1,5 +1,6 @@
 package com.github.kazmiruk.blog.entity;
 
+import com.github.kazmiruk.blog.annotation.UniqueUserEmail;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -12,11 +13,10 @@ public class User {
     @GeneratedValue
     private Integer id;
 
-    @Size(min = 3, message = "Name should be at least 3 characters!")
-    private String name;
-
     @Size(min = 1, message = "Invalid email address!")
     @Email(message = "Invalid email address!")
+    @Column(unique = true)
+    @UniqueUserEmail(message = "Such email already exists!")
     private String email;
 
     @Size(min = 5, message = "Password should be at least 5 characters!")
@@ -37,14 +37,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {

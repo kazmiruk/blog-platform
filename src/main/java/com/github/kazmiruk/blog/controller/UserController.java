@@ -18,14 +18,14 @@ public class UserController {
 
     @RequestMapping("/{id}")
     public String detail(Model model, @PathVariable int id) {
-        model.addAttribute("user", userService.findOneWithPosts(id));
+        model.addAttribute("user", userService.findOneWithCommentaries(id));
         return "user-detail";
     }
 
     @RequestMapping
     public String account(Model model, Principal principal) {
-        String name = principal.getName();
-        model.addAttribute("user", userService.findOneWithPosts(name));
+        String email = principal.getName();
+        model.addAttribute("user", userService.findOneWithCommentaries(email));
         return "user-account";
     }
 }

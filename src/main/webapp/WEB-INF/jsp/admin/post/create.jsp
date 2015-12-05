@@ -2,7 +2,7 @@
 
 <%@ include file="../../../layout/taglib.jsp" %>
 
-<form:form commandName="post" cssClass="form-horizontal">
+<form:form commandName="post" cssClass="form-horizontal postForm">
     <div class="form-group">
         <label for="title" class="col-sm-2 control-label">Title:</label>
         <div class="col-sm-10">
@@ -23,3 +23,24 @@
         </div>
     </div>
 </form:form>
+
+<script>
+    jQuery(document).ready(function() {
+        jQuery(".postForm").validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                content: {
+                    required: true
+                }
+            },
+            highlight: function(element) {
+                jQuery(element).closest(".form-group").removeClass("has-success").addClass("has-error");
+            },
+            unhighlight: function(element) {
+                jQuery(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+            }
+        });
+    });
+</script>

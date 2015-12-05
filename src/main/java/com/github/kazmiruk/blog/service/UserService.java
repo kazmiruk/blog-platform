@@ -5,7 +5,6 @@ import com.github.kazmiruk.blog.entity.Commentary;
 import com.github.kazmiruk.blog.entity.Role;
 import com.github.kazmiruk.blog.entity.User;
 import com.github.kazmiruk.blog.repository.CommentaryRepository;
-import com.github.kazmiruk.blog.repository.PostRepository;
 import com.github.kazmiruk.blog.repository.RoleRepository;
 import com.github.kazmiruk.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,11 @@ public class UserService {
         return userRepository.findOne(id);
     }
 
-    protected User populateUserWithPosts(User user) {
+    public User findOne(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    protected User populateUserWithCommentaries(User user) {
         List<Commentary> commentaries = commentaryRepository.findByUser(
             user, new PageRequest(0, 10, Sort.Direction.DESC, "publishedDate"));
         user.setCommentaries(commentaries);
@@ -47,15 +50,15 @@ public class UserService {
     }
 
     @Transactional
-    public User findOneWithPosts(int id) {
+    public User findOneWithCommentaries(int id) {
         User user = findOne(id);
-        return populateUserWithPosts(user);
+        return populateUserWithCommentaries(user);
     }
 
     @Transactional
-    public User findOneWithPosts(String name) {
-        User user = userRepository.findByName(name);
-        return populateUserWithPosts(user);
+    public User findOneWithCommentaries(String email) {
+        User user = findOne(email);
+        return populateUserWithCommentaries(user);
     }
 
     public void save(User user) {

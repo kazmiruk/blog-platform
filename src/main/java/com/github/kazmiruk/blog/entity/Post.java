@@ -1,5 +1,7 @@
 package com.github.kazmiruk.blog.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -13,9 +15,13 @@ public class Post {
     private Integer id;
 
     @Size(min = 1, message = "Title should be filled")
+    @Column(length = 1000)
     private String title;
 
     @Size(min = 1, message = "Content should be filled")
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(length = Integer.MAX_VALUE)
     private String content;
 
     private Date publishedDate;

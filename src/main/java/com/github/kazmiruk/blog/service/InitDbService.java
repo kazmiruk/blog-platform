@@ -37,43 +37,45 @@ public class InitDbService {
 
     @PostConstruct
     public void init() {
-        Role roleUser = new Role();
-        roleUser.setName("ROLE_USER");
-        roleRepository.save(roleUser);
+        if (roleRepository.findByName("ROLE_ADMIN") == null) {
+            Role roleUser = new Role();
+            roleUser.setName("ROLE_USER");
+            roleRepository.save(roleUser);
 
-        Role roleAdmin = new Role();
-        roleAdmin.setName("ROLE_ADMIN");
-        roleRepository.save(roleAdmin);
+            Role roleAdmin = new Role();
+            roleAdmin.setName("ROLE_ADMIN");
+            roleRepository.save(roleAdmin);
 
-        User userAdmin = new User();
-        userAdmin.setEmail("admin@localhost");
-        userAdmin.setEnabled(true);
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        userAdmin.setPassword(encoder.encode("admin"));
-        List<Role> roles = new ArrayList<>();
-        roles.add(roleAdmin);
-        roles.add(roleUser);
-        userAdmin.setRoles(roles);
-        userRepository.save(userAdmin);
+            User userAdmin = new User();
+            userAdmin.setEmail("admin@localhost");
+            userAdmin.setEnabled(true);
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            userAdmin.setPassword(encoder.encode("admin"));
+            List<Role> roles = new ArrayList<>();
+            roles.add(roleAdmin);
+            roles.add(roleUser);
+            userAdmin.setRoles(roles);
+            userRepository.save(userAdmin);
 
-        Post testPost = new Post();
-        testPost.setTitle("Test post");
-        testPost.setContent("Content of test post");
-        testPost.setPublishedDate(new Date());
-        postRepository.save(testPost);
+            Post testPost = new Post();
+            testPost.setTitle("Test post");
+            testPost.setContent("Content of test post");
+            testPost.setPublishedDate(new Date());
+            postRepository.save(testPost);
 
-        Commentary test_commentary1 = new Commentary();
-        test_commentary1.setContent("Test commentary");
-        test_commentary1.setPublishedDate(new Date());
-        test_commentary1.setPost(testPost);
-        test_commentary1.setUser(userAdmin);
-        commentaryRepository.save(test_commentary1);
+            Commentary test_commentary1 = new Commentary();
+            test_commentary1.setContent("Test commentary");
+            test_commentary1.setPublishedDate(new Date());
+            test_commentary1.setPost(testPost);
+            test_commentary1.setUser(userAdmin);
+            commentaryRepository.save(test_commentary1);
 
-        Commentary test_commentary2 = new Commentary();
-        test_commentary2.setContent("Test commentary");
-        test_commentary2.setPublishedDate(new Date());
-        test_commentary2.setPost(testPost);
-        test_commentary2.setUser(userAdmin);
-        commentaryRepository.save(test_commentary2);
+            Commentary test_commentary2 = new Commentary();
+            test_commentary2.setContent("Test commentary");
+            test_commentary2.setPublishedDate(new Date());
+            test_commentary2.setPost(testPost);
+            test_commentary2.setUser(userAdmin);
+            commentaryRepository.save(test_commentary2);
+        }
     }
 }

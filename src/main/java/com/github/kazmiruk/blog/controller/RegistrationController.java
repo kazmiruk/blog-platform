@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -27,13 +28,15 @@ public class RegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String doRegister(@Valid @ModelAttribute("user") User user, BindingResult result) {
+    public String doRegister(@Valid @ModelAttribute("user") User user, BindingResult result,
+                             RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return register();
         }
 
         userService.save(user);
-        return "redirect:/registration?success=true";
+        redirectAttributes.addFlashAttribute("success", true);
+        return "redirect:/registration";
     }
 
     @RequestMapping("/available")

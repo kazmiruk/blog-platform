@@ -47,7 +47,14 @@ public class PostService {
         return post;
     }
 
-    public List<Post> findAll() {
-        return postRepository.findAll(new PageRequest(0, 10, Sort.Direction.DESC, "publishedDate")).getContent();
+    public List<Post> findAllWithCommentaries() {
+        List<Post> posts = postRepository.findAll(
+                new PageRequest(0, 10, Sort.Direction.DESC, "publishedDate")).getContent();
+
+        for(Post post: posts) {
+            post.setCommentaries(commentaryRepository.findByPost(post));
+        }
+
+        return posts;
     }
 }

@@ -22,7 +22,7 @@ public class PostController {
 
     @RequestMapping("/")
     public String list(Model model) {
-        model.addAttribute("posts", postService.findAll());
+        model.addAttribute("posts", postService.findAllWithCommentaries());
         return "post-index";
     }
 

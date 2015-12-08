@@ -15,9 +15,15 @@
     <tbody>
         <c:forEach items="${user.commentaries}" var="commentary">
             <tr>
-                <td>${commentary.post.title}</td>
-                <td>${commentary.content}</td>
-                <td>${commentary.publishedDate}</td>
+                <td>
+                    <a href="<spring:url value="/post/${commentary.post.id}"/>">
+                        <c:out value="${commentary.post.title}"/>
+                    </a>
+                </td>
+                <td><c:out value="${commentary.content}"/></td>
+                <td>
+                    <fmt:formatDate value="${commentary.publishedDate}" pattern="dd.MM.yyy HH:mm"/>
+                </td>
             </tr>
         </c:forEach>
     </tbody>

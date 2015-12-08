@@ -3,12 +3,30 @@
 <%@ include file="../../layout/taglib.jsp" %>
 
 <h1>${post.title}</h1>
+<small><fmt:formatDate value="${post.publishedDate}" pattern="dd.MM.yyy HH:mm"/></small>
 
-<div id="content">${post.content}</div>
+<div id="content">
+    ${post.content}
+</div>
 
-<c:forEach items="${post.commentaries}" var="commentary">
-    <div id="commentary_${commentary.id}"><c:out value="${commentary.content}"/></div>
-</c:forEach>
+<h3>Commentaries (${fn:length(post.commentaries)})</h3>
+
+<table class="table table-bordered table-hover table-striped">
+    <tbody>
+        <c:forEach items="${post.commentaries}" var="commentary">
+            <tr id="commentary_${commentary.id}">
+                <td>
+                    <strong><c:out value="${commentary.user.email}"/></strong>
+                    <br/>
+                    <i>
+                        <fmt:formatDate value="${commentary.publishedDate}" pattern="dd.MM.yyy HH:mm"/>
+                    </i>
+                </td>
+                <td><c:out value="${commentary.content}"/></td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
 
 <security:authorize access="isAuthenticated()">
     <form:form action="/post/${post.id}/commentary/" commandName="commentary" cssClass="form-horizontal commentaryForm">

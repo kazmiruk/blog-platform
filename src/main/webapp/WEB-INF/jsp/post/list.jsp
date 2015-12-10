@@ -2,8 +2,7 @@
 
 <%@ include file="../../layout/taglib.jsp" %>
 
-
-<c:forEach items="${posts}" var="post">
+<c:forEach items="${postPage.content}" var="post">
     <h2>
         <a href="<spring:url value="/post/${post.id}" />">
             <c:out value="${post.title}"/>
@@ -30,3 +29,6 @@
         </tbody>
     </table>
 </c:forEach>
+
+<c:set var="_page" value="${postPage}" scope="request"/>
+<%@ include file="../../helpers/pager.jsp" %>

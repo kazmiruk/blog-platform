@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach items="${user.commentaries}" var="commentary">
+        <c:forEach items="${commentaryPage.content}" var="commentary">
             <tr>
                 <td>
                     <a href="<spring:url value="/post/${commentary.post.id}"/>">
@@ -28,3 +28,6 @@
         </c:forEach>
     </tbody>
 </table>
+
+<c:set var="_page" value="${commentaryPage}" scope="request"/>
+<%@ include file="../../helpers/pager.jsp" %>

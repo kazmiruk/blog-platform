@@ -6,6 +6,8 @@ import com.github.kazmiruk.blog.entity.Post;
 import com.github.kazmiruk.blog.repository.CommentaryRepository;
 import com.github.kazmiruk.blog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.method.P;
@@ -24,6 +26,9 @@ public class PostService {
 
     @Autowired
     private CommentaryRepository commentaryRepository;
+
+    @Value("${pageSize}")
+    private int pageSize;
 
     @Transactional
     public void save(Post post) {
@@ -47,14 +52,15 @@ public class PostService {
         return post;
     }
 
-    public List<Post> findAllWithCommentaries() {
-        List<Post> posts = postRepository.findAll(
-                new PageRequest(0, 10, Sort.Direction.DESC, "publishedDate")).getContent();
+    public Page<Post> findAllWithCommentaries(int page) {
+        Page<Post> postPage = postRepository.findAll(
+                new PageRequest(page, pageSize, Sort.Direction.DESC, "publishedDate"));
+        List<Post> posts = postPage.getContent();
 
         for(Post post: posts) {
             post.setCommentaries(commentaryRepository.findByPost(post));
         }
 
-        return posts;
+        return postPage;
     }
 }

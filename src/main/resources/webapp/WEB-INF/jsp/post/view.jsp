@@ -3,30 +3,30 @@
 <%@ include file="../../layout/taglib.jsp" %>
 
 <h1>${post.title}</h1>
-<small><fmt:formatDate value="${post.publishedDate}" pattern="dd.MM.yyy HH:mm"/></small>
+<small><span class="glyphicon glyphicon-time"></span>&nbsp;<fmt:formatDate value="${post.publishedDate}" pattern="dd.MM.yyy HH:mm"/></small>
 
 <div id="content">
     ${post.content}
 </div>
 
-<h3>Commentaries (${fn:length(post.commentaries)})</h3>
+<br/>
+<br/>
+<h4 id="commentaries">Commentaries <span class="badge">${fn:length(post.commentaries)}</span></h4>
 
-<table class="table table-bordered table-hover table-striped">
-    <tbody>
-        <c:forEach items="${post.commentaries}" var="commentary">
-            <tr id="commentary_${commentary.id}">
-                <td>
-                    <strong><c:out value="${commentary.user.email}"/></strong>
-                    <br/>
-                    <i>
-                        <fmt:formatDate value="${commentary.publishedDate}" pattern="dd.MM.yyy HH:mm"/>
-                    </i>
-                </td>
-                <td><c:out value="${commentary.content}"/></td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
+<c:forEach items="${post.commentaries}" var="commentary">
+    <div class="panel panel-info" id="commentary_${commentary.id}">
+        <div class="panel-heading">
+            <strong><c:out value="${commentary.user.email}"/></strong>
+            <small class="pull-right">
+                <span class="glyphicon glyphicon-time"></span>
+                &nbsp;<fmt:formatDate value="${commentary.publishedDate}" pattern="dd.MM.yyy HH:mm"/>
+            </small>
+        </div>
+        <div class="panel-body">
+            <c:out value="${commentary.content}"/>
+        </div>
+    </div>
+</c:forEach>
 
 <form:form action="/post/${post.id}/commentary/" commandName="commentary" cssClass="form-horizontal commentaryForm">
     <div class="form-group">

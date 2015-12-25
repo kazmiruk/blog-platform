@@ -11,6 +11,13 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="previewImg" class="col-sm-2 control-label">Preview image:</label>
+        <div class="col-sm-10">
+            <form:input path="previewImg" cssClass="form-control"/>
+            <form:errors path="previewImg"/>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="content" class="col-sm-2 control-label">Content:</label>
         <div class="col-sm-10">
             <form:textarea path="content"  cssClass="form-control"/>

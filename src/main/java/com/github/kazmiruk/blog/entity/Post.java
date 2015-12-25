@@ -18,6 +18,9 @@ public class Post {
     @Column(length = 1000)
     private String title;
 
+    @Column(length = 255)
+    private String previewImg;
+
     @Size(min = 1, message = "Content should be filled")
     @Lob
     @Type(type = "org.hibernate.type.TextType")
@@ -67,5 +70,13 @@ public class Post {
 
     public void setPublishedDate(Date publishDate) {
         this.publishedDate = publishDate;
+    }
+
+    public String getPreviewImg() {
+        return previewImg;
+    }
+
+    public void setPreviewImg(String previewImg) {
+        this.previewImg = previewImg;
     }
 }

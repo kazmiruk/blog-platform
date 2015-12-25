@@ -5,8 +5,8 @@ apply plugin: 'application'
 
 description = ""
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 group = 'com.github.kazmiruk.blog'
 version = 'v' + new SimpleDateFormat('yyyy.MM.dd').format(new Date()) + "-SNAPSHOT"
 
@@ -24,7 +24,8 @@ sourceSets {
 
 jar {
     manifest {
-        attributes 'Implementation-Title': project.name, 'Implementation-Version': version
+        attributes 'Implementation-Title': project.name, 'Implementation-Version': version,
+            'Main-Class': 'com.github.kazmiruk.blog.EmbeddedJetty'
     }
 }
 

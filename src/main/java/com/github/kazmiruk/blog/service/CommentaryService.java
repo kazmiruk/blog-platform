@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.Date;
 
 
@@ -29,8 +30,14 @@ public class CommentaryService {
     private int pageSize;
 
     @Transactional
-    public void save(String email, Commentary commentary) {
-        commentary.setUser(userRepository.findByEmail(email));
+    public void save(Principal principal, Commentary commentary) {
+        User user = null;
+
+        if (principal != null) {
+            user = userRepository.findByEmail(principal.getName());
+        }
+
+        commentary.setUser(user);
         commentary.setPublishedDate(new Date());
         commentaryRepository.save(commentary);
     }

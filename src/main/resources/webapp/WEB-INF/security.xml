@@ -14,7 +14,6 @@
               <intercept-url pattern="/login**" access="isAnonymous()"/>
               <intercept-url pattern="/register**" access="isAnonymous()"/>
               <intercept-url pattern="/user/**" access="isAuthenticated()"/>
-              <intercept-url pattern="/post/**/commentary**" access="isAuthenticated()"/>
               <form-login login-page="/login"/>
               <logout logout-url="/logout" logout-success-url="/"/>
        </http>

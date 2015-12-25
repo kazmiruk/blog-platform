@@ -39,7 +39,7 @@ public class CommentaryController {
         }
 
         commentary.setPost(postService.findOne(id));
-        commentaryService.save(principal.getName(), commentary);
+        commentaryService.save(principal, commentary);
         return "redirect:/post/" + String.valueOf(id);
     }
 }

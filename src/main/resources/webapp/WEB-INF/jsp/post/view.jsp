@@ -9,6 +9,14 @@
     ${post.content}
 </div>
 
+<c:if test="${post.tags.size() > 0}">
+    <p>
+        <c:forEach items="${post.tags}" var="tag">
+            <span class="label ${tag.className}">${tag.name}</span>
+        </c:forEach>
+    </p>
+</c:if>
+
 <br/>
 <br/>
 <h4 id="commentaries">Commentaries <span class="badge">${fn:length(post.commentaries)}</span></h4>

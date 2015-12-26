@@ -1,14 +1,8 @@
 package com.github.kazmiruk.blog.service;
 
 
-import com.github.kazmiruk.blog.entity.Commentary;
-import com.github.kazmiruk.blog.entity.Post;
-import com.github.kazmiruk.blog.entity.Role;
-import com.github.kazmiruk.blog.entity.User;
-import com.github.kazmiruk.blog.repository.CommentaryRepository;
-import com.github.kazmiruk.blog.repository.PostRepository;
-import com.github.kazmiruk.blog.repository.RoleRepository;
-import com.github.kazmiruk.blog.repository.UserRepository;
+import com.github.kazmiruk.blog.entity.*;
+import com.github.kazmiruk.blog.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,6 +29,9 @@ public class InitDbService {
     @Autowired
     private CommentaryRepository commentaryRepository;
 
+    @Autowired
+    private TagRepository tagRepository;
+
     @PostConstruct
     public void init() {
         if (roleRepository.findByName("ROLE_ADMIN") == null) {
@@ -57,10 +54,24 @@ public class InitDbService {
             userAdmin.setRoles(roles);
             userRepository.save(userAdmin);
 
+            Tag tag1 = new Tag();
+            tag1.setName("test1");
+            tag1.setClassName("label-primary");
+            tagRepository.save(tag1);
+
+            Tag tag2 = new Tag();
+            tag2.setName("test2");
+            tag2.setClassName("label-info");
+            tagRepository.save(tag2);
+
             Post testPost = new Post();
             testPost.setTitle("Test post");
             testPost.setContent("Content of test post");
             testPost.setPublishedDate(new Date());
+            List<Tag> tags = new ArrayList<>();
+            tags.add(tag1);
+            tags.add(tag2);
+            testPost.setTags(tags);
             postRepository.save(testPost);
 
             Commentary test_commentary1 = new Commentary();

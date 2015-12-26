@@ -32,6 +32,10 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Commentary> commentaries;
 
+    @ManyToMany
+    @JoinTable
+    private List<Tag> tags;
+
     public Integer getId() {
         return id;
     }
@@ -78,5 +82,13 @@ public class Post {
 
     public void setPreviewImg(String previewImg) {
         this.previewImg = previewImg;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

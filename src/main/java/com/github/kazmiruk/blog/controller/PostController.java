@@ -33,7 +33,7 @@ public class PostController {
 
     @RequestMapping("/post/{id}")
     public String view(Model model, @PathVariable int id) {
-        model.addAttribute("post", postService.findOneWithCommentaries(id));
+        model.addAttribute("post", postService.findOneWithCommentariesAndTags(id));
         return "post-view";
     }
 }

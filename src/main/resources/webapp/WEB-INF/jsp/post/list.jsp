@@ -31,14 +31,13 @@
                             </c:otherwise>
                         </c:choose>
                     </p>
-                    <p>
-                        <span class="label label-default">Tag1</span>
-                        <span class="label label-primary">Tag2</span>
-                        <span class="label label-success">Tag3</span>
-                        <span class="label label-info">Tag4</span>
-                        <span class="label label-warning">Tag5</span>
-                        <span class="label label-danger">Tag6</span>
-                    </p>
+                    <c:if test="${post.tags.size() > 0}">
+                        <p>
+                            <c:forEach items="${post.tags}" var="tag">
+                                <span class="label ${tag.className}">${tag.name}</span>
+                            </c:forEach>
+                        </p>
+                    </c:if>
                 </div>
             </div>
         </div>

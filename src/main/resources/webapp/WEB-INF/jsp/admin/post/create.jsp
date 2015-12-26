@@ -24,6 +24,9 @@
             <form:errors path="content"/>
         </div>
     </div>
+
+    <form:checkboxes path="tags" items="${tags}" itemValue="id" itemLabel="name"/>
+
     <div class="form-group">
         <div class="col-sm-2">
             <input type="submit" value="Save" class="btn btn-lg btn-primary"/>
